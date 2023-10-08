@@ -1,0 +1,495 @@
+#include <iostream>
+#include <string.h>
+using namespace std;
+void RegCIN();
+void CheckIN();
+void PriceEnq();
+void SuiteCIN();
+void DelCIN();
+void GuestList();
+void COUT();
+void RegCOUT();
+void DelCOUT();
+void SuiteCOUT();
+
+int RRcnt=0,DRcnt=0,SRcnt=0; 
+struct NormalRoom
+{
+	string name,mob;
+	int age,NOP;
+	int CINdate=0;
+	int COUTdate=0;	
+	struct NormalRoom *next;
+	
+};
+struct NormalRoom* RRstart=NULL;
+struct NormalRoom* RRlast=NULL;
+struct DeluxeRoom
+{
+	string name,mob;
+	int age,NOP;
+	int CINdate=0;
+	int COUTdate=0;	
+	struct DeluxeRoom *next;
+};
+struct DeluxeRoom* DRstart=NULL;
+struct DeluxeRoom* DRlast=NULL;
+struct SuiteRoom
+{
+	string name,mob;
+	int age,NOP;
+	int CINdate=0;
+	int COUTdate=0;	
+	struct SuiteRoom *next;
+};
+struct SuiteRoom* SRstart=NULL;
+struct SuiteRoom* SRlast=NULL;
+void CheckIN(){
+	
+	cout<<"\n\nPlease Choose the type of room you want\n 1.Regular   2. Deluxe  3.Suite";
+	int n;
+	cin>>n;
+	switch(n){
+		case 1:
+			cout<<"\n\n WELCOME TO REGISTRATION OF REGULAR ROOMS";
+			RegCIN();
+			break;
+		case 2:
+			cout<<"\n\n WELCOME TO REGISTRATION OF DELUXE ROOMS";
+			DelCIN();
+			break;
+		case 3:
+			cout<<"\n\n WELCOME TO REGISTRATION OF SUITES";
+			SuiteCIN();
+			break;
+		default:
+			cout<<"\n\n Entered wrong option!!!! Please TRY AGAIN";
+
+	}
+}
+void RegCIN(){
+	if(RRcnt==15){
+		cout<<"*********WE ARE FULL**********";
+		return;
+	}
+	struct NormalRoom* room;
+	room=new NormalRoom();
+	string s,s2;
+	cout<<"Please Enter Your Details...\n\n";
+	cout<<"\n\nName:- ";
+	cin>>s;
+	room->name=s;
+	cout<<"\nPhone No. :- ";
+	cin>>s2;
+	room->mob=s2;
+	cout<<"\nAge:- ";
+	cin>>room->age;
+	cout<<"\nNumber of people:-";
+	cin>>room->NOP;
+	room->next=NULL;
+	if(RRstart==NULL){
+		RRstart=room;
+		RRlast=room;
+		++RRcnt;
+		cout<<"\nThanks for choosing us...... ";
+		cout<<"Your Room no. is :- "<<RRcnt<<endl;
+	}
+	else{
+		RRlast->next=room;
+		RRlast=room;
+		++RRcnt;
+		cout<<"\nThanks for choosing us...... ";
+		cout<<"Your Room no. is :- "<<RRcnt<<endl;
+	}
+}
+void DelCIN(){
+	if(DRcnt==10){
+		cout<<"*********WE ARE FULL**********";
+		return;
+	}
+	struct DeluxeRoom* room;
+	room=new DeluxeRoom();
+	string s,s2;
+	cout<<"Please Enter Your Details...\n\n";
+	cout<<"\n\nName:- ";
+	cin>>s;
+	room->name=s;
+	cout<<"\nPhone No. :- ";
+	cin>>s2;
+	room->mob=s2;
+	cout<<"\nAge:- ";
+	cin>>room->age;
+	cout<<"\nNumber of people:-";
+	cin>>room->NOP;
+	room->next=NULL;
+	if(DRstart==NULL){
+		DRstart=room;
+		DRlast=room;
+		++DRcnt;
+		cout<<"\nThanks for choosing us...... ";
+		cout<<"Your Room no. is :- "<<DRcnt<<endl;
+	}
+	else{
+		DRlast->next=room;
+		DRlast=room;
+		++DRcnt;
+		cout<<"\nThanks for choosing us...... ";
+		cout<<"Your Room no. is :- "<<DRcnt<<endl;
+	}
+}
+void SuiteCIN(){
+	if(SRcnt==5){
+		cout<<"*********WE ARE FULL**********";
+		return;
+	}
+	struct SuiteRoom* room;
+	room=new SuiteRoom();
+	string s,s2;
+	cout<<"\n\nPlease Enter Your Details...\n\n";
+	cout<<"\n\nName:- ";
+	cin>>s;
+	room->name=s;
+	cout<<"\nPhone No. :- ";
+	cin>>s2;
+	room->mob=s2;
+	cout<<"\nAge:- ";
+	cin>>room->age;
+	cout<<"\nNumber of people:-";
+	cin>>room->NOP;
+	room->next=NULL;
+	if(SRstart==NULL){
+		SRstart=room;
+		SRlast=room;
+		++SRcnt;
+		cout<<"\nThanks for choosing us...... ";
+		cout<<"Your Room no. is :- "<<SRcnt<<endl;
+	}
+	else{
+		SRlast->next=room;
+		SRlast=room;
+		++SRcnt;
+		cout<<"\nThanks for choosing us...... ";
+		cout<<"Your Room no. is :- "<<SRcnt<<endl;
+	}
+}
+void GuestList(){
+
+	int x;			
+	cout<<"\n\nPress 1-RegularRooms 2-DeluxeRooms 3.Suites";
+	cin>>x;
+	switch(x){
+	case 1:
+		struct NormalRoom* ptr;
+		ptr=RRstart;
+		if(ptr == NULL)  
+        {  
+            printf("Empty list..");  
+        }  
+        else  
+        {   
+            while (ptr != NULL){  
+                cout<<ptr->name<<"______";
+
+                ptr = ptr->next;  
+            }  
+        }  
+		break;
+	case 2:
+		struct DeluxeRoom* ptr2;
+		ptr2=DRstart;
+		if(ptr2 == NULL)  
+        {  
+            printf("Empty list..");  
+        }  
+        else  
+        {   
+            while (ptr2 != NULL){  
+                cout<<ptr2->name<<"______";
+
+                ptr2 = ptr2->next;  
+            }  
+        }  
+		break;
+	case 3:
+		struct SuiteRoom* ptr3;
+		ptr3=SRstart;
+		if(ptr3 == NULL)  
+        {  
+            printf("Empty list..");  
+        }  
+        else  
+        {   
+            while (ptr3 != NULL){  
+                cout<<ptr3->name<<"______";
+
+                ptr3 = ptr3->next;  
+            }  
+        }  
+		break;
+	default:
+		cout<<"\n\n...Wrong Input...";
+	}
+				
+	    
+    
+        
+}
+void PriceEnq(){
+	cout<<"\tNormal: \t$20/night"<<endl;
+	cout<<"\tDeluxe: \t$40/night"<<endl;
+	cout<<"\tSuite:  \t$85/night"<<endl;
+	cout<<"\n\n **Breakfast,Lunch and Dinner included in Deluxe and Suite**\n\n";
+}
+void COUT(){
+	cout<<"\n\n\t\t\t.....WELCOME to the CheckOUT window...."<<endl;
+	
+	int x,age;
+	
+	cout<<"\nWhich type of room you had booked:- (Press 1-Regular Room 2-Deluxe Room 3-Suite)";
+	cin>>x;
+	switch(x){
+		case 1: 
+			RegCOUT();
+			break;
+		case 2:
+			DelCOUT();
+			break;
+		case 3:
+			SuiteCOUT();
+			break;
+		default:
+			cout<<"\n\n WRONG INPUT!!!!";
+	}
+
+}
+void RegCOUT(){
+	struct NormalRoom* ptr;
+	struct NormalRoom* ptr2;
+	string s;
+	int age1;
+	cout<<"\nPlease Enter Your Name:- ";
+	cin>>s;
+	cout<<"\nPlease Enter Your Age:- ";
+	cin>>age1;
+	ptr=RRstart;
+	ptr2=RRstart;
+	int count=0,flag=0;;
+	if(RRstart==NULL){
+		cout<<"\n\n .....Sorry WRONG INPUT.....";
+		return;
+	}
+	else if(ptr->next==NULL){
+		RRstart=NULL;
+		delete ptr;
+		RRcnt-=1;
+		cout<<"\n\n----CHECK OUT SUCCESSFUL-----";
+	}
+
+	else 
+	{
+		while(ptr!=NULL)
+		{
+			count++;
+			if(ptr->name==s)
+				if(ptr->age==age1){
+					flag=1;
+					break;
+				}
+			ptr=ptr->next;
+		}
+		cout<<"Count=="<<count;
+		if(count==1){
+			RRstart=ptr->next;
+			delete ptr;
+			cout<<"\n\n----CHECK OUT SUCCESSFUL-----";
+		}
+		else if(count!=RRcnt)
+			if(flag==1){
+				while(count > 2){
+					ptr2=ptr2->next;
+					count--;
+				}
+				cout<<"***ptr->name-"<<ptr2->name;
+				ptr2->next=ptr->next;
+				RRcnt-=1;
+				delete ptr;
+			cout<<"\n\n----CHECK OUT SUCCESSFUL-----";
+			}
+		else
+			if(flag==1){
+				while(count > 2){
+					ptr2=ptr2->next;
+					count--;
+				}
+				RRlast=ptr2;
+				ptr2->next=NULL;
+				RRcnt-=1;
+				delete ptr;
+				cout<<"\n\n----CHECK OUT SUCCESSFUL-----";
+			}
+
+	}
+}
+void DelCOUT(){
+	struct DeluxeRoom* ptr;
+	struct DeluxeRoom* ptr2;
+	string s;
+	int age1;
+	cout<<"\nPlease Enter Your Name:- ";
+	cin>>s;
+	cout<<"\nPlease Enter Your Age:- ";
+	cin>>age1;
+	ptr=DRstart;
+	ptr2=DRstart;
+	int count=0,flag=0;;
+	if(DRstart==NULL){
+		cout<<"\n\n .....Sorry WRONG INPUT.....";
+		return;
+	}
+	else if(ptr->next==NULL){
+		DRstart=NULL;
+		delete ptr;
+		DRcnt-=1;
+		cout<<"\n\n----CHECK OUT SUCCESSFUL-----";
+	}
+
+	else 
+	{
+		while(ptr!=NULL)
+		{
+			count++;
+			if(ptr->name==s)
+				if(ptr->age==age1){
+					flag=1;
+					break;
+				}
+			ptr=ptr->next;
+		}
+		cout<<"Count=="<<count;
+		if(count==1){
+			DRstart=ptr->next;
+			delete ptr;
+			cout<<"\n\n----CHECK OUT SUCCESSFUL-----";
+		}
+		else if(count!=DRcnt)
+			if(flag==1){
+				while(count > 2){
+					ptr2=ptr2->next;
+					count--;
+				}
+				ptr2->next=ptr->next;
+				DRcnt-=1;
+				delete ptr;
+			cout<<"\n\n----CHECK OUT SUCCESSFUL-----";
+			}
+		else
+			if(flag==1){
+				while(count > 2){
+					ptr2=ptr2->next;
+					count--;
+				}
+				DRlast=ptr2;
+				ptr2->next=NULL;
+				DRcnt-=1;
+				delete ptr;
+				cout<<"\n\n----CHECK OUT SUCCESSFUL-----";
+			}
+
+	}
+}
+void SuiteCOUT(){
+	struct SuiteRoom* ptr;
+	struct SuiteRoom* ptr2;
+	string s;
+	int age1;
+	cout<<"\nPlease Enter Your Name:- ";
+	cin>>s;
+	cout<<"\nPlease Enter Your Age:- ";
+	cin>>age1;
+	ptr=SRstart;
+	ptr2=SRstart;
+	int count=0,flag=0;;
+	if(SRstart==NULL){
+		cout<<"\n\n .....Sorry WRONG INPUT.....";
+		return;
+	}
+	else if(ptr->next==NULL){
+		SRstart=NULL;
+		delete ptr;
+		SRcnt-=1;
+		cout<<"\n\n----CHECK OUT SUCCESSFUL-----";
+	}
+
+	else 
+	{
+		while(ptr!=NULL)
+		{
+			count++;
+			if(ptr->name==s)
+				if(ptr->age==age1){
+					flag=1;
+					break;
+				}
+			ptr=ptr->next;
+		}
+		cout<<"Count=="<<count;
+		if(count==1){
+			SRstart=ptr->next;
+			delete ptr;
+			cout<<"\n\n----CHECK OUT SUCCESSFUL-----";
+		}
+		else if(count!=RRcnt)
+			if(flag==1){
+				while(count > 2){
+					ptr2=ptr2->next;
+					count--;
+				}
+				ptr2->next=ptr->next;
+				SRcnt-=1;
+				delete ptr;
+			cout<<"\n\n----CHECK OUT SUCCESSFUL-----";
+			}
+		else
+			if(flag==1){
+				while(count > 2){
+					ptr2=ptr2->next;
+					count--;
+				}
+				SRlast=ptr2;
+				ptr2->next=NULL;
+				SRcnt-=1;
+				delete ptr;
+				cout<<"\n\n----CHECK OUT SUCCESSFUL-----";
+			}
+
+	}
+}
+int main(){
+	while(1){
+		int n;
+		cout<<"Enter ur choice:"<<endl;
+		cout<<"1.PriceEnquiry\t2.CheckIN\t3.CheckOUT\t4.GuestList\t0.EXIT";
+		cin>>n;
+		switch(n){
+			case 1:	
+				cout<<" \n\n\n Here are the Prices of the rooms...\n\n";
+				PriceEnq();
+				break;
+			case 2:
+				CheckIN();
+				break;
+			case 3:
+				COUT();
+				break;
+			case 4:
+				GuestList();
+				break;
+			case 0:
+				cout<<"\n\n\nExiting the menu... "<<endl;
+				exit(0);
+			default:
+				cout<<"\n\nSorry!!! Looks like u entered the wrong option";
+				cout<<"\n\n...TRY AGAIN...";
+ 		}
+	}
+}
